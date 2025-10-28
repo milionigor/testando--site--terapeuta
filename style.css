@@ -24,6 +24,7 @@ body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
     color: var(--text-dark);
+    overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -102,7 +103,7 @@ section {
 }
 
 /* =========================================== */
-/* NAVBAR CORRIGIDA - HAMBURGUER FUNCIONAL */
+/* NAVBAR - CORRIGIDA E TESTADA */
 /* =========================================== */
 
 .navbar {
@@ -133,7 +134,7 @@ section {
     text-decoration: none;
 }
 
-/* Menu Desktop */
+/* Menu Desktop - SEMPRE visível em desktop */
 .nav-menu {
     display: flex;
     gap: 30px;
@@ -152,22 +153,7 @@ section {
     color: var(--primary-color);
 }
 
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--gradient);
-    transition: width 0.3s ease;
-}
-
-.nav-link:hover::after {
-    width: 100%;
-}
-
-/* Botão Hamburger - SEMPRE VISÍVEL NO MOBILE */
+/* BOTÃO HAMBURGUER - SEMPRE ESCONDIDO EM DESKTOP */
 .nav-toggle {
     display: none;
     flex-direction: column;
@@ -179,6 +165,7 @@ section {
     height: 30px;
     justify-content: center;
     align-items: center;
+    z-index: 1001;
 }
 
 .bar {
@@ -220,7 +207,7 @@ section {
 .hero {
     padding: 150px 0 100px;
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    margin-top: 70px; /* Compensa navbar fixa */
+    margin-top: 70px;
 }
 
 .hero-container {
@@ -526,57 +513,68 @@ section {
 }
 
 /* =========================================== */
-/* RESPONSIVIDADE CORRIGIDA - HAMBURGUER FUNCIONAL */
+/* MOBILE STYLES - HAMBURGUER FUNCIONAL */
 /* =========================================== */
 
 @media (max-width: 768px) {
-    /* MOSTRAR o botão hamburguer */
+    /* MOSTRAR BOTÃO HAMBURGUER NO MOBILE */
     .nav-toggle {
         display: flex !important;
+        position: relative;
         z-index: 1001;
     }
 
-    /* Esconder menu desktop, mostrar menu mobile */
+    /* ESCONDER MENU DESKTOP NO MOBILE */
     .nav-menu {
         position: fixed;
         top: 0;
         left: -100%;
-        width: 80%;
+        width: 280px;
         height: 100vh;
         background: rgba(255, 255, 255, 0.98);
         backdrop-filter: blur(10px);
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         justify-content: flex-start;
-        padding: 80px 20px 20px;
+        padding: 100px 30px 30px;
         gap: 0;
-        transition: left 0.3s ease;
-        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-        z-index: 1000;
+        transition: left 0.4s ease;
+        box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+        z-index: 999;
         overflow-y: auto;
     }
 
+    /* MENU ABERTO */
     .nav-menu.active {
         left: 0;
     }
 
+    /* LINKS DO MENU MOBILE */
     .nav-link {
         display: block;
-        padding: 15px 0;
+        padding: 18px 0;
         width: 100%;
-        text-align: center;
+        text-align: left;
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         font-size: 1.1rem;
         font-weight: 500;
+        color: var(--text-dark);
+        transition: all 0.3s ease;
+    }
+
+    .nav-link:hover {
+        color: var(--primary-color);
+        background: rgba(139, 95, 191, 0.05);
+        padding-left: 10px;
     }
 
     .nav-link:last-child {
         border-bottom: none;
     }
 
-    /* Animações do hamburguer */
+    /* ANIMAÇÃO DO HAMBURGUER PARA X */
     .nav-toggle.active .bar:nth-child(1) {
-        transform: rotate(45deg) translate(5px, 5px);
+        transform: rotate(45deg) translate(6px, 6px);
     }
 
     .nav-toggle.active .bar:nth-child(2) {
@@ -584,11 +582,11 @@ section {
     }
 
     .nav-toggle.active .bar:nth-child(3) {
-        transform: rotate(-45deg) translate(7px, -6px);
+        transform: rotate(-45deg) translate(6px, -6px);
     }
 
-    /* Overlay quando menu está aberto */
-    .nav-menu.active::before {
+    /* OVERLAY QUANDO MENU ESTÁ ABERTO */
+    .nav-menu.active::after {
         content: '';
         position: fixed;
         top: 0;
@@ -599,16 +597,17 @@ section {
         z-index: -1;
     }
 
-    /* Ajustes de layout mobile */
+    /* AJUSTES DE LAYOUT MOBILE */
     .hero-container {
         flex-direction: column;
         text-align: center;
+        gap: 40px;
     }
 
     .hero-buttons {
-        justify-content: center;
         flex-direction: column;
         align-items: center;
+        gap: 15px;
     }
 
     .btn {
@@ -616,12 +615,19 @@ section {
         max-width: 280px;
     }
 
+    .hero-stats {
+        justify-content: center;
+        gap: 25px;
+    }
+
     .sobre-content {
         flex-direction: column;
+        gap: 40px;
     }
 
     .agendamento-content {
         flex-direction: column;
+        gap: 40px;
     }
 
     .footer-content {
@@ -638,21 +644,30 @@ section {
     }
 
     .hero {
-        padding: 120px 0 80px;
+        padding: 130px 0 80px;
     }
 
     .image-placeholder {
-        width: 250px;
-        height: 350px;
+        width: 260px;
+        height: 340px;
     }
 
     .image-placeholder.circular {
-        width: 250px;
-        height: 250px;
+        width: 240px;
+        height: 240px;
+    }
+
+    .beneficios-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .beneficio-card {
+        padding: 25px 20px;
     }
 }
 
-/* Ajustes para telas muito pequenas */
+/* TELAS MUITO PEQUENAS */
 @media (max-width: 480px) {
     .nav-menu {
         width: 85%;
@@ -666,12 +681,12 @@ section {
         font-size: 1.8rem;
     }
 
-    .beneficios-grid {
-        grid-template-columns: 1fr;
-    }
-
     .hero-stats {
         flex-direction: column;
         gap: 20px;
+    }
+
+    .stat-number {
+        font-size: 1.8rem;
     }
 }

@@ -1,35 +1,77 @@
-// Menu Mobile Simples e Funcional
+// Menu Mobile - Código Simples e Funcional
+console.log('Script carregado! Verificando elementos...');
+
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM carregado! Iniciando menu mobile...');
+    
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
     
-    console.log('NavToggle:', navToggle);
-    console.log('NavMenu:', navMenu);
+    console.log('Botão hamburguer:', navToggle);
+    console.log('Menu:', navMenu);
 
-    // Clique no hamburguer
-    if (navToggle && navMenu) {
-        navToggle.addEventListener('click', function() {
-            console.log('Hamburguer clicado!');
-            navMenu.classList.toggle('active');
-            navToggle.classList.toggle('active');
-            
-            // Bloquear scroll quando menu está aberto
-            if (navMenu.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
-            }
-        });
-
-        // Fechar menu ao clicar nos links
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                navToggle.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
+    // Verificar se os elementos existem
+    if (!navToggle || !navMenu) {
+        console.error('Elementos do menu não encontrados!');
+        return;
     }
+
+    // Clique no hamburguer - FUNÇÃO PRINCIPAL
+    navToggle.addEventListener('click', function() {
+        console.log('✅ Hamburguer clicado!');
+        
+        // Alternar classes active
+        navMenu.classList.toggle('active');
+        navToggle.classList.toggle('active');
+        
+        // Bloquear/liberar scroll
+        if (navMenu.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.width = '100%';
+            console.log('📱 Menu ABERTO - scroll bloqueado');
+        } else {
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width = '';
+            console.log('📱 Menu FECHADO - scroll liberado');
+        }
+    });
+
+    // Fechar menu ao clicar nos links
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            console.log('🔗 Link clicado:', this.textContent);
+            
+            // Fechar menu mobile
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+            
+            // Restaurar scroll
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width = '';
+            
+            console.log('📱 Menu fechado após clique no link');
+        });
+    });
+
+    // Fechar menu ao clicar fora (apenas mobile)
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768 && 
+            navMenu.classList.contains('active') &&
+            !navMenu.contains(e.target) && 
+            !navToggle.contains(e.target)) {
+            
+            navMenu.classList.remove('active');
+            navToggle.classList.remove('active');
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.width = '';
+            
+            console.log('📱 Menu fechado ao clicar fora');
+        }
+    });
 
     // Formulário de agendamento
     const formAgendamento = document.getElementById('form-agendamento');
@@ -67,14 +109,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // Efeito de scroll na navbar
     window.addEventListener('scroll', function() {
         const navbar = document.querySelector('.navbar');
-        if (window.scrollY > 100) {
-            navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-            navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-        } else {
-            navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-            navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+        if (navbar) {
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
         }
     });
 
-    console.log('Site carregado - Hamburguer deve funcionar!');
+    console.log('✅ Menu mobile configurado com sucesso!');
+    console.log('📱 Teste: Reduza a tela para menos de 768px e clique nos 3 traços');
+});
+
+// Carregamento completo da página
+window.addEventListener('load', function() {
+    console.log('🎉 Página totalmente carregada!');
+    console.log('Largura da tela:', window.innerWidth);
+    console.log('Altura da tela:', window.innerHeight);
 });

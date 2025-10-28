@@ -255,5 +255,30 @@
     </footer>
 
     <script src="script.js"></script>
+
+    <!-- CÓDIGO DE EMERGÊNCIA - Coloque antes do </body> -->
+<script>
+// Código emergencial para o menu mobile
+console.log('🆘 Código emergencial carregado!');
+    
+document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    
+    if (navToggle && navMenu) {
+        // Forçar display do hamburguer no mobile
+        if (window.innerWidth <= 768) {
+            navToggle.style.display = 'flex';
+        }
+        
+        navToggle.addEventListener('click', function() {
+            console.log('🆘 EMERGÊNCIA: Hamburguer clicado!');
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
+        });
+    }
+});
+</script>
 </body>
+
 </html>
