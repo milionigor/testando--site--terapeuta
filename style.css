@@ -690,3 +690,25 @@ section {
         font-size: 1.8rem;
     }
 }
+/* Estilos para as imagens */
+.hero-img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.sobre-img {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #fff;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Remove os placeholders antigos */
+.image-placeholder {
+    display: none;
+}
