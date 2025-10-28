@@ -690,3 +690,141 @@ section {
         font-size: 1.8rem;
     }
 }
+/* =========================================== */
+/* CORREÇÕES PARA IMAGENS NO IPHONE */
+/* =========================================== */
+
+/* Garantir que as imagens/placeholders sejam visíveis */
+.image-placeholder {
+    width: 300px;
+    height: 400px;
+    background: var(--gradient);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.image-placeholder.circular {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+}
+
+.image-placeholder i {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+
+.image-placeholder p {
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    font-weight: 500;
+    text-align: center;
+    padding: 0 10px;
+}
+
+/* Hero Section - Correção específica para iPhone */
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+
+/* Sobre Section - Correção para imagem circular */
+.sobre-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Garantir que as imagens não desapareçam no mobile */
+@media (max-width: 768px) {
+    .hero-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+    
+    .hero-image {
+        order: -1; /* Coloca a imagem antes do conteúdo no mobile */
+        margin-bottom: 20px;
+    }
+    
+    .image-placeholder {
+        width: 280px;
+        height: 350px;
+        font-size: 3.5rem;
+    }
+    
+    .image-placeholder.circular {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .image-placeholder i {
+        font-size: 4rem;
+    }
+    
+    .image-placeholder p {
+        font-size: 1rem;
+    }
+    
+    .sobre-content {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .sobre-image {
+        padding: 10px;
+    }
+}
+
+/* Correção específica para iPhone Safari */
+@supports (-webkit-touch-callout: none) {
+    .image-placeholder {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+    
+    .hero-image,
+    .sobre-image {
+        -webkit-perspective: 1000;
+        -webkit-backface-visibility: hidden;
+    }
+}
+
+/* Garantir que os placeholders sejam clicáveis e visíveis */
+.image-placeholder {
+    -webkit-tap-highlight-color: transparent;
+    cursor: default;
+    user-select: none;
+}
+
+/* Melhorar contraste e visibilidade */
+.image-placeholder {
+    background: linear-gradient(135deg, #8B5FBF 0%, #6B46C1 50%, #F687B3 100%);
+    box-shadow: 0 10px 30px rgba(139, 95, 191, 0.3);
+}
+
+/* Loading states para garantir renderização */
+.image-placeholder::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: transparent;
+    z-index: 1;
+}

@@ -130,3 +130,43 @@ window.addEventListener('load', function() {
     console.log('Largura da tela:', window.innerWidth);
     console.log('Altura da tela:', window.innerHeight);
 });
+// Debug para verificar se as imagens estão carregando
+window.addEventListener('load', function() {
+    console.log('🎉 Página totalmente carregada!');
+    console.log('Largura da tela:', window.innerWidth);
+    console.log('Altura da tela:', window.innerHeight);
+    
+    // Verificar se os placeholders estão visíveis
+    const placeholders = document.querySelectorAll('.image-placeholder');
+    console.log('Placeholders encontrados:', placeholders.length);
+    
+    placeholders.forEach((placeholder, index) => {
+        const rect = placeholder.getBoundingClientRect();
+        console.log(`Placeholder ${index + 1}:`, {
+            visible: rect.width > 0 && rect.height > 0,
+            width: rect.width,
+            height: rect.height,
+            top: rect.top,
+            left: rect.left
+        });
+    });
+});
+
+// Forçar redesenho nos iPhones
+if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+    document.addEventListener('DOMContentLoaded', function() {
+        const forceRedraw = function(element) {
+            if (element) {
+                element.style.display = 'none';
+                element.offsetHeight; // trigger reflow
+                element.style.display = '';
+            }
+        };
+        
+        // Forçar redesenho das imagens após um breve delay
+        setTimeout(function() {
+            const placeholders = document.querySelectorAll('.image-placeholder');
+            placeholders.forEach(forceRedraw);
+        }, 100);
+    });
+}
