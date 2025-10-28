@@ -65,8 +65,11 @@
                 </div>
             </div>
             <div class="hero-image">
-    <img src="assets/terapeuta-hero.png" alt="Dra. Maria Silva - Terapeuta Emocional" class="hero-img">
-</div>
+                <div class="image-placeholder">
+                    <i class="fas fa-user-circle"></i>
+                    <p>Imagem da terapeuta</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -76,8 +79,10 @@
             <h2 class="section-title">Sobre a Terapeuta</h2>
             <div class="sobre-content">
                 <div class="sobre-image">
-    <img src="assets/terapeuta-sobre.png" alt="Dra. Maria Silva" class="sobre-img">
-</div>
+                    <div class="image-placeholder circular">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                </div>
                 <div class="sobre-text">
                     <h3>Dra. Maria Silva</h3>
                     <p class="sobre-descricao">Sou terapeuta emocional especializada em relacionamentos com mais de 5 anos de experiência. Ajudo homens e mulheres a superarem conflitos emocionais e desenvolverem inteligência emocional.</p>
@@ -250,8 +255,28 @@
     </footer>
 
     <script src="script.js"></script>
-
+    <!-- CÓDIGO DE EMERGÊNCIA - Coloque antes do </body> -->
+<script>
+// Código emergencial para o menu mobile
+console.log('🆘 Código emergencial carregado!');
     
+document.addEventListener('DOMContentLoaded', function() {
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+    
+    if (navToggle && navMenu) {
+        // Forçar display do hamburguer no mobile
+        if (window.innerWidth <= 768) {
+            navToggle.style.display = 'flex';
+        }
+        
+        navToggle.addEventListener('click', function() {
+            console.log('🆘 EMERGÊNCIA: Hamburguer clicado!');
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
+        });
+    }
+});
+</script>
 </body>
-
 </html>
